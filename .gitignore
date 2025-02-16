@@ -1,0 +1,36 @@
+# Binaries and executables
+*.exe
+*.out
+*.o
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+
+# Dependency files
+vendor/
+
+# Build and output directories
+bin/
+dist/
+
+# Environment variables
+.env.*
+
+# Development/Private files
+gocommerce.env
+test_gocommerce.env
+
+# Binaries
+# Add binaries here
+
+dev-docker-compose.yml
+docker.env
+
+DUMP/
+tmp/
+.air.*
