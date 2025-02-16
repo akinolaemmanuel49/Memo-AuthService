@@ -6,8 +6,8 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/akinolaemmanuel49/Memo-Microservices/AuthService/api/dtos"
-	"github.com/akinolaemmanuel49/Memo-Microservices/AuthService/config"
+	"github.com/akinolaemmanuel49/Memo-AuthService/config"
+	"github.com/akinolaemmanuel49/Memo-AuthService/internal/repository/dtos"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 )

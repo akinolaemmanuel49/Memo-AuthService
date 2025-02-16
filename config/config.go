@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/akinolaemmanuel49/Memo-Microservices/AuthService/logging"
+	"github.com/akinolaemmanuel49/Memo-AuthService/logging"
 	"github.com/joho/godotenv"
 )
 
@@ -123,10 +123,7 @@ func LoadConfig() (*Config, error) {
 	// Load environment variables from .env file
 	err := godotenv.Load(fmt.Sprintf(".env.%s", cfg.Environment))
 	if err != nil {
-		// Only return error if it's not a missing file error
-		if !os.IsNotExist(err) {
-			return nil, fmt.Errorf("error loading .env file: %w", err)
-		}
+		return nil, fmt.Errorf("error loading .env file: %w", err)
 	}
 
 	// Load service configuration
@@ -135,6 +132,9 @@ func LoadConfig() (*Config, error) {
 	cfg.Service.Port = getEnvAsInt("SERVICE_PORT", 8000)
 
 	// Load database configuration
+	if getEnv("DATABASE_URI", "") == "" {
+		return nil, fmt.Errorf("DATABASE_URI environment variable is required")
+	}
 	cfg.Database.URI = getEnv("DATABASE_URI", "")
 	cfg.Database.MaxConns = int32(getEnvAsInt("DATABASE_MAX_CONNS", 25))
 	cfg.Database.MinConns = int32(getEnvAsInt("DATABASE_MIN_CONNS", 5))

@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"github.com/akinolaemmanuel49/Memo-Microservices/AuthService/internal/handler"
-	"github.com/akinolaemmanuel49/Memo-Microservices/AuthService/internal/repository/database"
+	"github.com/akinolaemmanuel49/Memo-AuthService/internal/handler"
+	"github.com/akinolaemmanuel49/Memo-AuthService/internal/repository/database"
 	"github.com/gofiber/fiber/v2"
 )
 

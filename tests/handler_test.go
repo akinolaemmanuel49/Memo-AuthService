@@ -10,22 +10,33 @@ import (
 	"testing"
 	"time"
 
-	"github.com/akinolaemmanuel49/Memo-Microservices/AuthService/internal/handler"
-	"github.com/akinolaemmanuel49/Memo-Microservices/AuthService/internal/repository/database"
-	"github.com/akinolaemmanuel49/Memo-Microservices/AuthService/internal/repository/dtos"
+	"github.com/akinolaemmanuel49/Memo-AuthService/config"
+	"github.com/akinolaemmanuel49/Memo-AuthService/internal/handler"
+	"github.com/akinolaemmanuel49/Memo-AuthService/internal/repository/database"
+	"github.com/akinolaemmanuel49/Memo-AuthService/internal/repository/dtos"
 	"github.com/gofiber/fiber/v2"
 	"github.com/stretchr/testify/assert"
 )
 
 func setupTestDB(t *testing.T) *database.Database {
-	// Read database URL from environment variables
-	dsn := os.Getenv("TEST_DATABASE_URL")
-	if dsn == "" {
-		t.Fatal("TEST_DATABASE_URL is not set")
+	ctx := context.Background()
+
+	os.Setenv("ENVIRONMENT", "testing")
+
+	// Change to the project root directory
+	err := os.Chdir("../.")
+	if err != nil {
+		log.Fatalf("Error changing working directory: %v", err)
+	}
+
+	// Load configuration
+	cfg, err := config.LoadConfig()
+	if err != nil {
+		log.Fatalf("Failed to load config: %v", err)
 	}
 
 	// Initialize the database connection
-	db, err := database.NewDatabase(dsn) // Assuming this function initializes *database.Database
+	db, err := database.New(ctx, cfg)
 	if err != nil {
 		t.Fatalf("Failed to initialize database: %v", err)
 	}
@@ -46,12 +57,13 @@ func cleanupDB(db *database.Database) {
 	defer cancel()
 
 	queries := []string{
-		"DELETE FROM users;",
-		"DELETE FROM sessions;",
-		"DELETE FROM logs;",
+		// "DELETE FROM users;",
+		// "DELETE FROM sessions;",
+		// "DELETE FROM logs;",
 	}
 	for _, query := range queries {
-		_, err := db.Pool.Exec(ctx, query)
+		// _, err := db.Pool.Exec(ctx, query)
+		_, err := db.Pool().Exec(ctx, query)
 		if err != nil {
 			log.Printf("Failed to clean up test database: %v", err)
 		}

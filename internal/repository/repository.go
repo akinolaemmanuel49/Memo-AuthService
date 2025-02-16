@@ -3,7 +3,7 @@ package repository
 import (
 	"log/slog"
 
-	"github.com/akinolaemmanuel49/Memo-Microservices/AuthService/internal/repository/database"
+	"github.com/akinolaemmanuel49/Memo-AuthService/internal/repository/database"
 )
 
 type Repository struct {

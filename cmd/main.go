@@ -7,9 +7,9 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/akinolaemmanuel49/Memo-Microservices/AuthService/api/server"
-	"github.com/akinolaemmanuel49/Memo-Microservices/AuthService/config"
-	"github.com/akinolaemmanuel49/Memo-Microservices/AuthService/internal/repository/database"
+	"github.com/akinolaemmanuel49/Memo-AuthService/api/server"
+	"github.com/akinolaemmanuel49/Memo-AuthService/config"
+	"github.com/akinolaemmanuel49/Memo-AuthService/internal/repository/database"
 )
 
 func main() {
